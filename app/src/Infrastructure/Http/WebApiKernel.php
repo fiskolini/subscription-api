@@ -55,7 +55,6 @@ class WebKernel
     private function middlewares(): array
     {
         return [
-            Middleware\DummyAuthMiddleware::class,
             Middleware\ErrorHandlerMiddleware::class,
         ];
     }
