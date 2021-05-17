@@ -68,7 +68,7 @@ Solution
 
 ### Extra Credits:
 
-Every code was written by the author, from the bootloader to this README.md file :). Using DDD approach, every Domain is
+Every code was written by the author, from the bootloader to this README.md file 😊. Using DDD approach, every Domain is
 structured to have a single responsibility, from the HTTP Routes (inside `Infrastructure\Http`) or even
 Repositories (`Persistence\Repositories`).
 
