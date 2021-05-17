@@ -12,12 +12,34 @@ use Psr\Http\Message\ServerRequestInterface;
  *     tags={"customer"},
  *     path="/customers",
  *     operationId="getCustomers",
+ *     summary="Get active customers list",
+ *     security={
+ *      {"bearer": {}},
+ *     },
+ *     @OA\Parameter(
+ *      parameter="Limit",
+ *      name="limit",
+ *      description="Limit the customers to receive",
+ *      @OA\Schema(
+ *          type="integer"
+ *      ),
+ *      in="query",
+ *      required=false
+ *      ),
  *     @OA\Response(
  *      response="200",
  *      description="List all customers",
  *      @OA\JsonContent(
  *          type="array",
- *          @OA\Items(ref="#Customer")
+ *          @OA\Items(ref="#/components/schemas/CustomerSchema")
+ *      )
+ *     ),
+ *     @OA\Response(
+ *      response="401",
+ *      description="Unauthenticated",
+ *      @OA\JsonContent(
+ *          type="string",
+ *          @OA\Property(property="message", type="string", example="Not authorized"),
  *      )
  *     )
  * )

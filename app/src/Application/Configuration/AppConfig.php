@@ -11,7 +11,7 @@ class AppConfig extends BaseConfigurationInstance
      */
     public function getRootDir(): string
     {
-        return $this->config['root_directory'] ?? '';
+        return $this->config['ROOT_DIR'] ?? '';
     }
 
     /**
@@ -19,6 +19,6 @@ class AppConfig extends BaseConfigurationInstance
      */
     public function getToken(): string
     {
-        return $this->config['token'] ?? '';
+        return $this->config['BEARER_TOKEN'] ?? '';
     }
 }

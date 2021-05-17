@@ -28,5 +28,11 @@
     },
     "require-dev": {
         "symfony/var-dumper": "^5.2"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "./vendor/bin/openapi --output ./openapi.json ./src/",
+            "./vendor/bin/phinx migrate"
+        ]
     }
 }

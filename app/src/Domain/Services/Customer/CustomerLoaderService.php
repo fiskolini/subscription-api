@@ -4,7 +4,7 @@
 namespace Barkyn\Domain\Services\Customer;
 
 use Barkyn\Domain\Entities\Customer\CustomerEntity;
-use Barkyn\Domain\Repositories\Customer\CustomerRepository;
+use Barkyn\Persistence\Repositories\Customer\CustomerRepository;
 
 class CustomerLoaderService
 {
@@ -21,6 +21,22 @@ class CustomerLoaderService
     public function __construct(CustomerRepository $customerRepository)
     {
         $this->customerRepository = $customerRepository;
+    }
+
+    /**
+     * Fetch all customers, including the ones deleted
+     *
+     * @return CustomerEntity[]
+     */
+    public function fetchById(int $id): array
+    {
+        $customer = $this->customerRepository->fetchById($id, true, false);
+
+        if (is_null($customer)) {
+            return [];
+        }
+
+        return $customer->toArray();
     }
 
     /**

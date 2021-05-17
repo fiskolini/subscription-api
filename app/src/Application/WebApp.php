@@ -4,15 +4,15 @@
 namespace Barkyn\Application;
 
 
-use Barkyn\Infrastructure\Http\WebKernel;
+use Barkyn\Infrastructure\Http\WebApiKernel;
 use Barkyn\Persistence\PersistenceLoader;
 
 class WebApp
 {
     /**
-     * @var WebKernel $kernel
+     * @var WebApiKernel $kernel
      */
-    private WebKernel $kernel;
+    private WebApiKernel $kernel;
 
     /**
      * @var PersistenceLoader $persistenceLoader
@@ -22,10 +22,10 @@ class WebApp
     /**
      * WebApp constructor.
      *
-     * @param WebKernel         $kernel
+     * @param WebApiKernel      $kernel
      * @param PersistenceLoader $persistenceLoader
      */
-    public function __construct(WebKernel $kernel, PersistenceLoader $persistenceLoader)
+    public function __construct(WebApiKernel $kernel, PersistenceLoader $persistenceLoader)
     {
         $this->kernel = $kernel;
         $this->persistenceLoader = $persistenceLoader;

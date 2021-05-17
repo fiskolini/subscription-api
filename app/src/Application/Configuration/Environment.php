@@ -12,8 +12,8 @@ class Environment extends BaseConfigurationInstance
     public function isDev(): bool
     {
         return (
-            array_key_exists('env', $this->config) &&
-            $this->config['env'] === 'development'
+            array_key_exists('ENV', $this->config) &&
+            $this->config['ENV'] === 'development'
         );
     }
 }

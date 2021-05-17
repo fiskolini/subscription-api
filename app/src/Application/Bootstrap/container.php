@@ -2,7 +2,6 @@
 
 use Barkyn\Application\Configuration\DbConfig;
 use Barkyn\Application\Configuration\Environment;
-use Barkyn\Domain\Repository\Customer\CustomerRepository;
 use Barkyn\Infrastructure\Config\ConfigLoader;
 use Nyholm\Psr7\Factory\Psr17Factory;
 use Psr\Container\ContainerInterface;

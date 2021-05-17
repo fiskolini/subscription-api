@@ -42,12 +42,18 @@ services:
     depends_on:
       - postgres
 
-  npm:
-    build: .docker/npm
-    container_name: barkyn-npm
-    working_dir: /app
+  swagger:
+    #build: .docker/swagger
+    image: swaggerapi/swagger-ui
+    container_name: barkyn-swagger
+    environment:
+      API_URL: swagger/openapi.json
+    ports:
+      - 8001:8080
     volumes:
-      - ./app:/app
+      - ./app:/usr/share/nginx/html/swagger
+    depends_on:
+      - php
     networks:
       testing_net:
         ipv4_address: 172.28.1.4

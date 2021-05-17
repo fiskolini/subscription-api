@@ -7,6 +7,15 @@ use Slim\App;
 
 
 /**
+ * @OA\Server(url="http://barkyn.codes/api")
+ * @OA\Schemes(format="http")
+ * @OA\SecurityScheme(
+ *      securityScheme="bearer",
+ *      in="header",
+ *      name="bearerAuth",
+ *      type="http",
+ *      scheme="bearer"
+ * )
  * @OA\OpenApi(
  *     @OA\Info(
  *         version="1.0.0",
@@ -17,7 +26,7 @@ use Slim\App;
  *     )
  * )
  */
-class WebKernel
+class WebApiKernel
 {
     /**
      * @var App Slim Application
@@ -43,7 +52,7 @@ class WebKernel
     {
         return [
             __DIR__ . '/Routes/customers.php',
-            __DIR__ . '/Routes/docs.php',
+            __DIR__ . '/Routes/general.php',
         ];
     }
 
@@ -55,6 +64,7 @@ class WebKernel
     private function middlewares(): array
     {
         return [
+            Middleware\CorsEnabler::class,
             Middleware\ErrorHandlerMiddleware::class,
         ];
     }
@@ -64,6 +74,7 @@ class WebKernel
      */
     public function run()
     {
+        $this->app->setBasePath('/api');
         $this->loadMiddleware();
         $this->loadRoutes();
 
@@ -75,8 +86,6 @@ class WebKernel
      */
     private function loadRoutes()
     {
-        $this->app->setBasePath('/api');
-
         foreach ($this->routes() as $router) {
             (include_once $router)($this->app);
         }
@@ -90,5 +99,9 @@ class WebKernel
         foreach ($this->middlewares() as $middleware) {
             $this->app->add($middleware);
         }
+
+        // Add the Slim built-in routing middleware
+        // to the app middleware stack.
+        $this->app->addRoutingMiddleware();
     }
 }

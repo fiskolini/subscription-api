@@ -28,7 +28,7 @@ final class ConfigLoader
      */
     public function __construct(string $rootDir)
     {
-        $this->dotenv = Dotenv::createImmutable(
+        $this->dotenv = Dotenv::createUnsafeImmutable(
             $this->rootDir = $rootDir
         );
     }
@@ -40,10 +40,6 @@ final class ConfigLoader
     {
         if (!empty(self::$config))
             return self::$config;
-
-        $this->dotenv->required([
-
-        ]);
 
         return self::$config = array_merge(
             $this->dotenv->load(),
@@ -60,7 +56,7 @@ final class ConfigLoader
     private function initialConfiguration(): array
     {
         return [
-            'root_directory' => $this->rootDir
+            'ROOT_DIR' => $this->rootDir
         ];
     }
 }
