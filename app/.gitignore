@@ -3,9 +3,13 @@
 composer.phar
 ../composer.lock
 
+# Npm
+/node_modules
+
 # Tests
 /phpunit.xml
 .phpunit.result.cache
 
 # Others
 .env
+
