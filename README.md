@@ -57,6 +57,11 @@ The current docker configuration will create the following containers:
 
 Solution
 ========
+The API should be running under `/api` base path (http://barkyn.codes/api).
+
+**NOTE**: all of the `/customer` routes are using a `DummyMiddleware` to _simulate_ a real application. This mean that
+every request should be giving a `Bearer` token. **The required token** should be placed under `app/.env` file,
+in `BEARER_TOKEN` property.
 
 ### The current solution includes the following technologies:
 
@@ -72,7 +77,8 @@ Every code was written by the author, from the bootloader to this README.md file
 structured to have a single responsibility, from the HTTP Routes (inside `Infrastructure\Http`) or even
 Repositories (`Persistence\Repositories`).
 
-I respected SOLID principles, mostly **Single Responsibility**, **Liskov Substitution** by receiving interfaces, and **Dependency Inversion** by dealing with dependency injection. 
+I respected SOLID principles, mostly **Single Responsibility**, **Liskov Substitution** by receiving interfaces, and **
+Dependency Inversion** by dealing with dependency injection.
 
 
 
@@ -87,4 +93,5 @@ This solution doesn't have any code coverage.
 
 #### 2. Features to take into account:
 
-**Only** the `Customer` feature was taken into account. This decision was intention, since I strongly believe the whole point of this exercise is to **check the code rather than the functionality itself**.
+**Only** the `Customer` feature was taken into account. This decision was intention, since I strongly believe the whole
+point of this exercise is to **check the code rather than the functionality itself**.
