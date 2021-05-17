@@ -1,0 +1,60 @@
+version: "3.1"
+services:
+  postgres:
+    image: postgres:9.6-alpine
+    container_name: barkyn-postgres
+    restart: always
+    volumes:
+      - ./.data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - 5432:5432
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.1
+
+  web:
+    image: nginx:alpine
+    container_name: barkyn-web
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./.docker/nginx:/etc/nginx/conf.d
+    ports:
+      - 80:80
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.2
+
+  php:
+    build: .docker/php
+    container_name: barkyn-php
+    working_dir: /app
+    volumes:
+      - ./app:/app
+      - ./.docker/php/php.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.3
+    depends_on:
+      - postgres
+
+  npm:
+    build: .docker/npm
+    container_name: barkyn-npm
+    working_dir: /app
+    volumes:
+      - ./app:/app
+    networks:
+      testing_net:
+        ipv4_address: 172.28.1.4
+
+networks:
+  testing_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.28.0.0/16

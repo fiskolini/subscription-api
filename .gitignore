@@ -1,0 +1,13 @@
+# IDE stuff
+/.idea
+
+#docker
+.data
+
+# OS
+.DS_Store
+Thumbs.db
+
+
+# Others
+.env
