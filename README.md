@@ -43,6 +43,7 @@ To get started, the following steps needs to be taken:
 + `cp app/.env.example app/.env` for the application config.
 + Properly fill `app/.env` file with the config.
 + Run `docker-compose up -d` to start the containers.
++ Run `docker exec -it barkyn-php composer install` to install all PHP dependencies.
 + Visit http://localhost to access to application. Alternatively, you can add `barkyn.codes` to your `/etc/hosts` file
   and navigate to that url.
 
